@@ -5,6 +5,14 @@ public class Food {
     protected String protectedField;
     String defaultField;
     private String privateField;
+
+    public Food() {
+    }
+
+    public Food(String foodName) {
+        this.foodName = foodName;
+    }
+
     //  fields
     //  constructors
     //  methods

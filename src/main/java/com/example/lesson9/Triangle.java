@@ -1,5 +1,6 @@
 package com.example.lesson9;
 
+//  POJO
 public class Triangle extends Shape {
     protected int firstSide;
     protected int secondSide;
@@ -17,14 +18,16 @@ public class Triangle extends Shape {
 
     public Triangle(int firstSide, int secondSide, int thirdSide) {
         if (firstSide + secondSide > thirdSide &&
-        secondSide + thirdSide > firstSide && thirdSide + firstSide > secondSide){
+        secondSide + thirdSide > firstSide && thirdSide + firstSide > secondSide) {
             this.firstSide = firstSide;
             this.secondSide = secondSide;
             this.thirdSide = thirdSide;
             calculateAngles();
 //            calculate firstAngle, second and third angles
+        } else {
+            throw new IllegalArgumentException("Not valid argument for triangle");
         }
-        throw new IllegalArgumentException("Not valid argument for triangle");
+
     }
 
     public Triangle(int firstSide, int secondSide, double angleBetweenSides) {
