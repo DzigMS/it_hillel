@@ -1,15 +1,20 @@
 package com.example;
 
+import com.example.config.ConfigProvider;
 import com.example.lesson17.BlogPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.List;
 
 public class BlogPageTest {
+
+    private WebDriver driver;
 
     public void namePatternTest() {
 //        local var     -->     pre-cond, input, expected   (given)
@@ -17,16 +22,20 @@ public class BlogPageTest {
 //        return        -->     assert actual == expected   (then)
     }
 
-    @Test
-    public void searchJobsResultTest() throws InterruptedException {
-//        given
-        WebDriver driver = new SafariDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        Runtime.getRuntime().addShutdownHook(new Thread(driver::quit));
+    @BeforeMethod
+    public void setUp() {
+        driver = ConfigProvider.getDriver();
+    }
 
-        String searchInput = "jobs";
-        String expectedContain = "Джобс";
+    @Test(dataProvider = "dataProviderName")
+//    @Test()
+//    @Parameters(value = {})
+    public void searchJobsResultTest(String searchInput, String expectedContain) throws InterruptedException {
+//        given
+//        setUp();
+
+//        String searchInput = "jobs";
+//        String expectedContain = "Джобс";
 
         BlogPage page = new BlogPage(driver);
 
@@ -41,5 +50,18 @@ public class BlogPageTest {
 //        assert !searchedPage.getSearchResultTitles().stream()
 //                .filter(results -> results.contains(expectedContain))
 //                .toList().isEmpty();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+
+    @DataProvider(name = "dataProviderName")
+    public Object[][] dataProviderName(){
+        return new Object[][]{
+                {"jobs", "Джобс"},
+                {"link", "link"}
+        };
     }
 }

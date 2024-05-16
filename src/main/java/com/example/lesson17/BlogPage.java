@@ -1,5 +1,7 @@
 package com.example.lesson17;
 
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -23,8 +25,13 @@ public class BlogPage extends BasePage {
     @FindBy(css = SEARCH_FIELD_INPUT_SELECTOR)
     private WebElement searchInput;
 
+//    private SelenideElement searchInput = Selenide.$(By.cssSelector(SEARCH_FIELD_INPUT_SELECTOR));
+
     @FindBy(css = POST_LIST_ITEMS_SELECTOR)
     private List<WebElement> postListItems;
+
+//    public BlogPage() {
+//    }
 
     public BlogPage(WebDriver driver) {
         super(driver);
@@ -43,6 +50,8 @@ public class BlogPage extends BasePage {
 
 //        searchInput = lazyImpl(searchInput, SEARCH_FIELD_INPUT_SELECTOR);
         searchInput.sendKeys(searchText);
+//        Selenide.element(searchInput).shouldHave().type();
+//        searchInput.shouldHave()
     }
 
     public BlogPage fillSearchFieldAndPressEnter(String searchText) {
