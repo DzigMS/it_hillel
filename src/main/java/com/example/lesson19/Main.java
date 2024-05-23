@@ -57,14 +57,17 @@ public class Main {
         dogs.add(new Dog("Tuzik", "Buldog", LocalDate.now().minusDays(5)));
         dogs.add(new Dog("Knopa", "Pitbul", LocalDate.now().minusDays(1)));
 
-//        Stream.generate()
+        Stream.generate(() -> DogProvider.getDog())
+                .limit(10)
+//                intermediate op-s
+                .forEach(System.out::println);
 
-        List<String> list = dogs.stream()
-                .filter(dog -> dog.getDateOfBirth().isAfter(LocalDate.now().minusDays(7)))
-                .sorted((dog1, dog2) -> dog1.getDogName().compareTo(dog2.getDogName()))
-                .map(dog -> dog.getDogName())
-                .toList();
-
-        System.out.println(list);
+//        List<String> list = dogs.stream()
+//                .filter(dog -> dog.getDateOfBirth().isAfter(LocalDate.now().minusDays(7)))
+//                .sorted((dog1, dog2) -> dog1.getDogName().compareTo(dog2.getDogName()))
+//                .map(dog -> dog.getDogName())
+//                .toList();
+//
+//        System.out.println(list);
     }
 }
